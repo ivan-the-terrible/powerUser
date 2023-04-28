@@ -1,4 +1,4 @@
-oh-my-posh init pwsh | Invoke-Expression
+oh-my-posh init pwsh --config ~\Documents\PowerShell\powerUser\mytheme.omp.json | Invoke-Expression
 Import-Module -Name Terminal-Icons
 # For zoxide v0.8.0+
 Invoke-Expression (& {
@@ -12,9 +12,11 @@ function updateOhMyPosh { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
 
 #POWERSHELL
 
-function updatePowerShell {winget install --id Microsoft.Powershell --source winget}
+function updatePowerShell {winget upgrade --id Microsoft.Powershell --source winget}
 function profile {Get-Content "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"}
 function getDef($func) {(Get-Command $func).Definition}
+
+function ch {[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()}
 
 #END POWERSHELL
 
