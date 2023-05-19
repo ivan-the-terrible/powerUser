@@ -1,3 +1,5 @@
+Set-PSReadlineKeyHandler -Key Tab -Function HistorySearchBackward
+
 oh-my-posh init pwsh --config ~\Documents\PowerShell\powerUser\mytheme.omp.json | Invoke-Expression
 Import-Module -Name Terminal-Icons
 # For zoxide v0.8.0+
@@ -37,7 +39,7 @@ function prune {docker system prune}
 #END DOCKER
 
 #JIRA CLI
-
+# https://github.com/ankitpokhrel/jira-cli#usage
 function jList { jira sprint list --current -ax --columns "Key,Summary" }
 function jMine { jira sprint list --current -a(jira me) --columns "Key,Summary,Status" }
 function jAssign($issueName) {jira issue assign $issueName $(jira me)}
@@ -86,3 +88,4 @@ function jDone($issueName) {
 function restore {dotnet restore --interactive}
 function nup {npm run start}
 function ghidra {& "C:\Program Files\ghidra_10.2_PUBLIC\ghidraRun.bat"}
+
