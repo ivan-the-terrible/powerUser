@@ -45,7 +45,8 @@ function jMine { jira sprint list --current -a(jira me) --columns "Key,Summary,S
 function jAssign($issueName) {jira issue assign $issueName $(jira me)}
 function currentIssue { $Env:CURRENT_ISSUE_NAME }
 function updateCurrentIssue($newIssue) {
-    [Environment]::SetEnvironmentVariable("CURRENT_ISSUE_NAME", $newIssue, [System.EnvironmentVariableTarget]::User)
+    [Environment]::SetEnvironmentVariable("CURRENT_ISSUE_NAME", $newIssue, [System.EnvironmentVariableTarget]::User) &&
+    refreshenv
 }
 function jView($issueName) {
     if ([bool]$issueName) {
