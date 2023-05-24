@@ -23,7 +23,7 @@ function ch {[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()}
 #END POWERSHELL
 
 #DOCKER
-
+# https://docs.docker.com/engine/reference/commandline/cli/
 function dv {docker compose down -v}
 function up {docker compose up}
 function bup {docker compose up --build}
@@ -47,6 +47,8 @@ function currentIssue { $Env:CURRENT_ISSUE_NAME }
 function updateCurrentIssue($newIssue) {
     [Environment]::SetEnvironmentVariable("CURRENT_ISSUE_NAME", $newIssue, [System.EnvironmentVariableTarget]::User) &&
     refreshenv
+
+    # refreshenv is from Chocolatey
 }
 function jView($issueName) {
     if ([bool]$issueName) {
