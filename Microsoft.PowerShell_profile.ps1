@@ -16,11 +16,11 @@ function updateOhMyPosh { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
 
 function updatePowerShell {winget upgrade --id Microsoft.Powershell --source winget}
 function profile {Get-Content "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"}
-function updateProfile {
+function updateProfile($gitMessage) {
     Copy-Item "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
     "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser\Microsoft.PowerShell_profile.ps1" `
     && Set-Location "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser" `
-    && git commit -a -m "Updated profile" `
+    && git commit -a -m $gitMessage `
     && git push
 }
 function getDef($func) {(Get-Command $func).Definition}
