@@ -49,6 +49,12 @@ function prune {docker system prune}
 # https://github.com/ankitpokhrel/jira-cli#usage
 function jList { jira sprint list --current -ax --columns "Key,Summary" }
 function jMine { jira sprint list --current -a(jira me) --columns "Key,Summary,Status" }
+function jFixVersion($fixVersion) {
+    $tickets = jira sprint list --current -a(jira me) --plain --no-headers --columns "Key"
+    foreach ($ticket in $tickets) {
+        jira issue edit $ticket --fix-version $fixVersion --no-input
+    }
+}
 function jAssign($issueName) {jira issue assign $issueName $(jira me)}
 function currentIssue { $Env:CURRENT_ISSUE_NAME }
 function updateCurrentIssue($newIssue) {
