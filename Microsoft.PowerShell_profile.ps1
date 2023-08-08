@@ -1,4 +1,5 @@
-Set-PSReadlineKeyHandler -Key Tab -Function HistorySearchBackward
+# Chocolatey required
+Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 
 oh-my-posh init pwsh --config ~\Documents\PowerShell\powerUser\mytheme.omp.json | Invoke-Expression
 Import-Module -Name Terminal-Icons
@@ -26,6 +27,10 @@ function updateProfile($gitMessage) {
 function getDef($func) {(Get-Command $func).Definition}
 
 function ch {[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()}
+
+function getPublicIP {(Invoke-WebRequest ifconfig.me/ip).Content.Trim()}
+
+function wifiPass($SSID) {netsh wlan show profile name=$SSID key=clear}
 
 #END POWERSHELL
 
@@ -56,11 +61,10 @@ function jFixVersion($fixVersion) {
     }
 }
 function jAssign($issueName) {jira issue assign $issueName $(jira me)}
-function currentIssue { $Env:CURRENT_ISSUE_NAME }
-function updateCurrentIssue($newIssue) {
-    [Environment]::SetEnvironmentVariable("CURRENT_ISSUE_NAME", $newIssue, [System.EnvironmentVariableTarget]::User) &&
-    refreshenv
-
+function jIssue { $Env:CURRENT_ISSUE_NAME }
+function jSet($newIssue) {
+    [Environment]::SetEnvironmentVariable("CURRENT_ISSUE_NAME", $newIssue, [System.EnvironmentVariableTarget]::User) `
+    && refreshenv
     # refreshenv is from Chocolatey
 }
 function jView($issueName) {
@@ -104,4 +108,3 @@ function jDone($issueName) {
 function restore {dotnet restore --interactive}
 function nup {npm run start}
 function ghidra {& "C:\Program Files\ghidra_10.2_PUBLIC\ghidraRun.bat"}
-
