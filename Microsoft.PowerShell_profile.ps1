@@ -17,12 +17,12 @@ function updateOhMyPosh { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
 
 function updatePowerShell {winget upgrade --id Microsoft.Powershell --source winget}
 function profile {Get-Content "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"}
-function updateProfile($gitMessage) {
-    Copy-Item "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-    "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser\Microsoft.PowerShell_profile.ps1" `
-    && Set-Location "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser" `
-    && git commit -a -m $gitMessage `
-    && git push
+function copyProfile {
+    $localProfile = "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+    $client = Select-String -Path $localProfile -Pattern "# CLIENT"
+    $clientSectionStartingLine = ($client.LineNumber)[1]
+    $nonClientCode = Get-Item -Path $localProfile | Get-Content -Head ($clientSectionStartingLine - 1)
+    $nonClientCode | Out-File "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser\Microsoft.PowerShell_profile.ps1"
 }
 function getDef($func) {(Get-Command $func).Definition}
 
@@ -108,3 +108,4 @@ function jDone($issueName) {
 function restore {dotnet restore --interactive}
 function nup {npm run start}
 function ghidra {& "C:\Program Files\ghidra_10.2_PUBLIC\ghidraRun.bat"}
+
