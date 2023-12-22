@@ -1,6 +1,8 @@
 # Chocolatey required
 Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+
 oh-my-posh init pwsh --config ~\Documents\PowerShell\powerUser\mytheme.omp.json | Invoke-Expression
 Import-Module -Name Terminal-Icons
 # For zoxide v0.8.0+
@@ -25,6 +27,8 @@ function copyProfile {
     $nonClientCode | Out-File "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser\Microsoft.PowerShell_profile.ps1"
 }
 function getDef($func) {(Get-Command $func).Definition}
+
+function path($file) {Get-Item $file | Select-Object FullName}
 
 function ch {[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()}
 
