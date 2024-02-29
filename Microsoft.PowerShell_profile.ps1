@@ -16,10 +16,13 @@ Invoke-Expression (& {
 function firstTimeWingetInstall {
     Install-Module Terminal-Icons
     $packages = @(
+        'Git.Git',
+        '7zip.7zip',
         'junegunn.fzf',
         'Chocolatey.Chocolatey',
         'JanDeDobbeleer.OhMyPosh',
-        'Microsoft.PowerToys'
+        'Microsoft.PowerToys',
+        'Docker.DockerDesktop'
     )
     foreach ($package in $packages) {
         winget install $package
