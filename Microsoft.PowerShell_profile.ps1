@@ -13,18 +13,42 @@ Invoke-Expression (& {
 #Change 'z' to 'cd' if you aren't using that module and put in an absolute path
 #Best to use these commands if you aren't already in the local-dev directory
 
+function firstTimeWingetInstall {
+    Install-Module Terminal-Icons
+    $packages = @(
+        'junegunn.fzf',
+        'Chocolatey.Chocolatey',
+        'JanDeDobbeleer.OhMyPosh',
+        'Microsoft.PowerToys'
+    )
+    foreach ($package in $packages) {
+        winget install $package
+    }
+}
+function firstTimeChocoInstall {
+    $packages = @(
+        'nvm',
+        'pyenv-win',
+        'gh',
+        'zoxide'
+    )
+    foreach ($package in $packages) {
+        choco install $package -y
+    }
+}
+
 function updateOhMyPosh { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
 
 #POWERSHELL
 
 function updatePowerShell {winget upgrade --id Microsoft.Powershell --source winget}
-function profile {Get-Content "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"}
+function profile {Get-Content "~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"}
 function copyProfile {
-    $localProfile = "C:\Users\Ivan Chwalik\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+    $localProfile = "~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
     $client = Select-String -Path $localProfile -Pattern "# CLIENT"
     $clientSectionStartingLine = ($client.LineNumber)[1]
     $nonClientCode = Get-Item -Path $localProfile | Get-Content -Head ($clientSectionStartingLine - 1)
-    $nonClientCode | Out-File "C:\Users\Ivan Chwalik\Documents\PowerShell\powerUser\Microsoft.PowerShell_profile.ps1"
+    $nonClientCode | Out-File "~\Documents\PowerShell\powerUser\Microsoft.PowerShell_profile.ps1"
 }
 function getDef($func) {(Get-Command $func).Definition}
 
