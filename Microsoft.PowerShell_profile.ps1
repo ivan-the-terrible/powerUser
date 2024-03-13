@@ -161,6 +161,9 @@ function restore {dotnet restore --interactive}
 function nup {npm run start}
 function ghidra {& "C:\Program Files\ghidra_10.2_PUBLIC\ghidraRun.bat"}
 
+#GIT
+
+function wt($branchName) {git worktree add -b $branchName $branchName}
 function apply {
     git stash show -p | git apply
 }
@@ -168,3 +171,5 @@ function apply {
 function reverse {
     git stash show -p | git apply -R
 }
+
+#END GIT
