@@ -84,7 +84,7 @@
           "style": "plain",
           "foreground": "p:green",
           "background": "transparent",
-          "template": "\uf898 ",
+          "template": "\uf898 {{ .Full }} ",
           "properties": {
             "display_mode": "files",
             "fetch_package_manager": false,
@@ -96,7 +96,7 @@
           "style": "plain",
           "foreground": "p:blue",
           "background": "transparent",
-          "template": "\ufcd1 ",
+          "template": "\ufcd1 {{ .Full }} ",
           "properties": {
             "fetch_version": false
           }
@@ -106,12 +106,18 @@
           "style": "plain",
           "foreground": "p:yellow",
           "background": "transparent",
-          "template": "\ue235 ",
+          "template": "\ue235 {{ .Full }} ",
           "properties": {
             "display_mode": "files",
-            "fetch_version": false,
-            "fetch_virtual_env": false
+            "fetch_version": true
           }
+        },
+        {
+          "type": "dotnet",
+          "style": "plain",
+          "foreground": "p:blue",
+          "background": "transparent",
+          "template": "\ue77f {{ .Full }} "
         },
         {
           "type": "shell",
