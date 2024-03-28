@@ -33,7 +33,8 @@ function firstTimeChocoInstall {
         'nvm',
         'pyenv-win',
         'gh',
-        'zoxide'
+        'zoxide',
+        'bat'
     )
     foreach ($package in $packages) {
         choco install $package -y
