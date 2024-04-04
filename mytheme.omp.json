@@ -9,21 +9,35 @@
       "alignment": "left",
       "segments": [
         {
-          "type": "session",
+          "type": "nightscout",
           "style": "diamond",
-          "foreground": "p:black",
-          "background": "p:yellow",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b0",
-          "template": " {{ if .SSHSession }}\uf817 {{ end }}{{ .UserName }} "
+          "foreground": "#ffffff",
+          "background": "#ff0000",
+          "background_templates": [
+            "{{ if gt .Sgv 150 }}#FFFF00{{ end }}",
+            "{{ if lt .Sgv 60 }}#FF0000{{ end }}",
+            "#00FF00"
+          ],
+          "foreground_templates": [
+            "{{ if gt .Sgv 150 }}#000000{{ end }}",
+            "{{ if lt .Sgv 60 }}#000000{{ end }}",
+            "#000000"
+          ],
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": " {{ .Sgv }}{{ .TrendIcon }}",
+          "properties": {
+            "url": "http://192.168.0.127:1337/api/v1/entries.json",
+            "http_timeout": 1500
+          }
         },
         {
           "type": "path",
           "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "foreground": "p:white",
           "background": "p:orange",
-          "template": " \uf74a {{ path .Path .Location }} ",
+          "template": " 󰉋 {{ path .Path .Location }} ",
           "properties": {
             "style": "folder"
           }
@@ -31,7 +45,7 @@
         {
           "type": "git",
           "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "foreground": "p:black",
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}p:black{{ end }}",
@@ -50,26 +64,26 @@
             "branch_max_length": 25,
             "fetch_status": true,
             "fetch_upstream_icon": true,
-            "github_icon": "\uf7a3"
+            "github_icon": "󰊤"
           }
         },
         {
           "type": "root",
           "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "foreground": "p:white",
           "background": "p:yellow",
-          "template": " \uf0e7 "
+          "template": "  "
         },
         {
-          "type": "exit",
+          "type": "status",
           "style": "diamond",
           "foreground": "p:white",
           "background": "p:blue",
           "background_templates": ["{{ if gt .Code 0 }}p:red{{ end }}"],
-          "leading_diamond": "<transparent,background>\ue0b0</>",
-          "trailing_diamond": "\ue0b4",
-          "template": " {{ if gt .Code 0 }}\uf00d{{ else }}\uf00c{{ end }} ",
+          "leading_diamond": "<transparent,background></>",
+          "trailing_diamond": "",
+          "template": " {{ if gt .Code 0 }}{{ else }}{{ end }} ",
           "properties": {
             "always_enabled": true
           }
@@ -84,7 +98,7 @@
           "style": "plain",
           "foreground": "p:green",
           "background": "transparent",
-          "template": "\uf898 {{ .Full }} ",
+          "template": "󰎙 {{ .Full }} ",
           "properties": {
             "display_mode": "files",
             "fetch_package_manager": false,
@@ -96,7 +110,7 @@
           "style": "plain",
           "foreground": "p:blue",
           "background": "transparent",
-          "template": "\ufcd1 {{ .Full }} ",
+          "template": " {{ .Full }} ",
           "properties": {
             "fetch_version": false
           }
@@ -106,7 +120,7 @@
           "style": "plain",
           "foreground": "p:yellow",
           "background": "transparent",
-          "template": "\ue235 {{ .Full }} ",
+          "template": " {{ .Full }} ",
           "properties": {
             "display_mode": "files",
             "fetch_version": true
@@ -117,7 +131,7 @@
           "style": "plain",
           "foreground": "p:blue",
           "background": "transparent",
-          "template": "\ue77f {{ .Full }} "
+          "template": " {{ .Full }} "
         },
         {
           "type": "shell",
@@ -140,8 +154,8 @@
             "always_enabled": true
           },
           "style": "plain",
-          "template": "\uf054",
-          "type": "exit"
+          "template": "",
+          "type": "status"
         }
       ]
     }
@@ -153,9 +167,9 @@
       "style": "diamond",
       "foreground": "p:white",
       "background": "p:orange",
-      "leading_diamond": "\ue0b0",
-      "trailing_diamond": "\ue0b4",
-      "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
+      "leading_diamond": "",
+      "trailing_diamond": "",
+      "template": "  {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
       "properties": {
         "display_default": true
       }
@@ -166,9 +180,9 @@
       "style": "diamond",
       "foreground": "p:white",
       "background": "p:blue",
-      "leading_diamond": "\ue0b0",
-      "trailing_diamond": "\ue0b4",
-      "template": " \ufd03 {{ .Name }} ",
+      "leading_diamond": "",
+      "trailing_diamond": "",
+      "template": " 󰠅 {{ .Name }} ",
       "properties": {
         "display_default": true
       }
@@ -177,12 +191,12 @@
   "transient_prompt": {
     "foreground": "p:black",
     "background": "transparent",
-    "template": "<p:yellow,transparent>\ue0b6</><,p:yellow> {{ .Folder }} </><p:yellow,transparent>\ue0b0</> "
+    "template": "<p:yellow,transparent></><,p:yellow> {{ .Folder }} </><p:yellow,transparent></> "
   },
   "secondary_prompt": {
     "foreground": "p:black",
     "background": "transparent",
-    "template": "<p:yellow,transparent>\ue0b6</><,p:yellow> > </><p:yellow,transparent>\ue0b0</> "
+    "template": "<p:yellow,transparent></><,p:yellow> > </><p:yellow,transparent></> "
   },
   "palette": {
     "black": "#262B44",
