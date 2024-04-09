@@ -22,7 +22,7 @@ function firstTimeWingetInstall {
         'Chocolatey.Chocolatey',
         'JanDeDobbeleer.OhMyPosh',
         'Microsoft.PowerToys',
-        'Docker.DockerDesktop'
+        'suse.RancherDesktop'
     )
     foreach ($package in $packages) {
         winget install $package
