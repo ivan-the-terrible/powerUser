@@ -161,7 +161,7 @@ function combinePDFs {magick -density 150 $(Get-ChildItem *pdf) output.pdf}
 
 function restore {dotnet restore --interactive}
 function nup {npm run start}
-function ghidra {& "C:\Program Files\ghidra_10.2_PUBLIC\ghidraRun.bat"}
+function ghidra {& "C:\Program Files\ghidra\ghidraRun.bat"}
 
 #GIT
 
