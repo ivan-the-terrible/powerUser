@@ -17,12 +17,17 @@ function firstTimeWingetInstall {
     Install-Module Terminal-Icons
     $packages = @(
         'Git.Git',
-        '7zip.7zip',
+        'GitHub.cli',
         'junegunn.fzf',
-        'Chocolatey.Chocolatey',
-        'JanDeDobbeleer.OhMyPosh',
+        'ajeetdsouza.zoxide'
+        '7zip.7zip',
+        'sharkdp.bat',
+        'sharkdp.fd',
+        'CoreyButler.NVMforWindows',
         'Microsoft.PowerToys',
-        'suse.RancherDesktop'
+        'JanDeDobbeleer.OhMyPosh',
+        'suse.RancherDesktop',
+        'Chocolatey.Chocolatey'
     )
     foreach ($package in $packages) {
         winget install $package
@@ -30,12 +35,7 @@ function firstTimeWingetInstall {
 }
 function firstTimeChocoInstall {
     $packages = @(
-        'nvm',
         'pyenv-win',
-        'gh',
-        'zoxide',
-        'bat',
-        'fd'
     )
     foreach ($package in $packages) {
         choco install $package -y
