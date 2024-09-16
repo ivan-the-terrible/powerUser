@@ -35,10 +35,31 @@ function firstTimeWingetInstall {
 }
 function firstTimeChocoInstall {
     $packages = @(
-        'pyenv-win',
+        'pyenv-win'
     )
     foreach ($package in $packages) {
         choco install $package -y
+    }
+}
+
+function configureNuShell {
+    $nuShellConfigPath = "$env:APPDATA\nushell"
+    $envNuPath = Join-Path -Path $nuShellConfigPath -ChildPath "env.nu"
+    $configNuPath = Join-Path -Path $nuShellConfigPath -ChildPath "config.nu"
+
+    if (Test-Path -Path $envNuPath -PathType Leaf) { # just checking env.nu is enough
+        # as per https://github.com/ajeetdsouza/zoxide#:~:text=Ksh-,Nushell,-PowerShell
+        # as per https://ohmyposh.dev/docs/installation/prompt#:~:text=fish-,nu,-powershell
+        zoxide init nushell >> ~/.zoxide.nu
+        oh-my-posh init nu
+
+        "`nzoxide init nushell | save -f ~/.zoxide.nu" | Out-File -Append -FilePath $envNuPath
+        "oh-my-posh init nu" | Out-File -Append -FilePath $envNuPath
+
+        "`nsource ~/.zoxide.nu" | Out-File -Append -FilePath $configNuPath
+        "source ~/.oh-my-posh.nu" | Out-File -Append -FilePath $configNuPath
+    } else {
+        Write-Output "One or both of env.nu and config.nu do not exist in $nuShellConfigPat. Is NuShell installed?"
     }
 }
 
