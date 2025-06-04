@@ -184,6 +184,8 @@ function restore {dotnet restore --interactive}
 function nup {npm run start}
 function ghidra {& "C:\Program Files\ghidra\ghidraRun.bat"}
 
+function getVideoFrame($inputFile, $timeMarker) {ffmpeg -i $inputFile -ss $timeMarker -vframes 1 output.png}
+
 #GIT
 
 function wt($branchName) {git worktree add -b $branchName $branchName}
